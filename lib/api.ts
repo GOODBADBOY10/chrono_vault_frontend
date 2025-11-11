@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Capsule } from "@/types/capsule";
 
-const API_BASE = "http://localhost:8000"; // change to your backend
+// const API_BASE = "http://localhost:8000"; // change to your backend
+const API_BASE = "http://127.0.0.1:8000";
+
 
 export const getAllCapsules = async (): Promise<Capsule[]> => {
   const res = await axios.get(`${API_BASE}/capsules`);
