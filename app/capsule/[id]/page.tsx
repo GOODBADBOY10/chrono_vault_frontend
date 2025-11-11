@@ -9,7 +9,12 @@ import { ShareLinkButton } from "@/components/share-link-button"
 import { getCapsuleByPublicId } from "@/lib/api"
 
 export default async function CapsulePage({ params }: { params: { id: string } }) {
-  const capsule = await getCapsuleByPublicId(params.id)
+
+  const { id } = await params;
+
+  const capsule = await getCapsuleByPublicId(id);
+
+  // const capsule = await getCapsuleByPublicId(params.id)
 
   if (!capsule) {
     notFound()

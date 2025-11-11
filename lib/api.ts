@@ -10,9 +10,21 @@ export const getAllCapsules = async (): Promise<Capsule[]> => {
   return res.data;
 };
 
-export const getCapsuleByPublicId = async (public_id: string): Promise<Capsule> => {
-  const res = await axios.get(`${API_BASE}/capsules/${public_id}`);
-  return res.data;
+// export const getCapsuleByPublicId = async (public_id: string): Promise<Capsule> => {
+//   const res = await axios.get(`${API_BASE}/capsules/${public_id}`);
+//   return res.data;
+// };
+
+export const getCapsuleByPublicId = async (public_id: string): Promise<Capsule | null> => {
+  try {
+    const res = await axios.get(`${API_BASE}/capsules/${public_id}`);
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null; // Capsule not found
+    }
+    throw error; // Re-throw other errors
+  }
 };
 
 export const createCapsule = async (data: {
